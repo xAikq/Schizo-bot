@@ -1,5 +1,6 @@
 from aiogram import Bot, Dispatcher, types
 from dotenv import load_dotenv, find_dotenv
+import os
 from random import randint
 
 load_dotenv(find_dotenv())
