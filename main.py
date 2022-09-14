@@ -28,6 +28,8 @@ async def inline_handler(query: types.InlineQuery):
     articles = [InlineQueryResultArticle(
     id = result_gay_id,
     title = 'Насколько ты гей',
+    description = 'Насколько ты любишь в попу',
+    thumb_url = 'https://i.ytimg.com/vi/jy0bm4rXXQ0/maxresdefault_live.jpg',
     input_message_content = types.InputTextMessageContent(message_text = text))]
 
     await query.answer(articles, cache_time = 1, is_personal = True)
