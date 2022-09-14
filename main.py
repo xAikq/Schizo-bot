@@ -1,3 +1,4 @@
+from aiogram import Bot, Dispatcher, types
 from dotenv import load_dotenv, find_dotenv
 from random import randint
 
@@ -6,7 +7,7 @@ load_dotenv(find_dotenv())
 bot = Bot(os.getenv('token'))
 dp = Dispatcher(bot)
 
-@dp.message_handler()
+@dp.message_handler(commands=['gay'])
 async def gay_test(message):
     min = 0
     max = 100
