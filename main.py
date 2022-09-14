@@ -1,4 +1,4 @@
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, types, executor
 from dotenv import load_dotenv, find_dotenv
 import os
 from random import randint
