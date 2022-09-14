@@ -7,7 +7,7 @@ bot = Bot(os.getenv('token'))
 dp = Dispatcher(bot)
 
 @dp.message_handler()
-async def gay_test():
+async def gay_test(message):
     min = 0
     max = 100
     await message.reply('Я гей на: ' + randit(min, max) + '%')
