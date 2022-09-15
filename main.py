@@ -9,8 +9,10 @@ load_dotenv(find_dotenv())
 bot = Bot(os.getenv('token'))
 dp = Dispatcher(bot)
 
-@dp.inline_handler()
-async def inline_gay_handler(query: types.InlineQuery):
+# gay_articles = []
+# beer_articles = []
+
+def inline_gay_handler():
     min_gay = 0
     max_gay = 100
     overall_gay = randint(min_gay, max_gay)
@@ -30,8 +32,9 @@ async def inline_gay_handler(query: types.InlineQuery):
     description = 'Насколько ты любишь в попу',
     thumb_url = 'https://i.ytimg.com/vi/jy0bm4rXXQ0/maxresdefault_live.jpg',
     input_message_content = types.InputTextMessageContent(message_text = gay_text))]
+    return gay_articles
 
-
+def inline_beer_handler():
     min_beer = 0
     max_beer = 100
     overall_beer = randint(min_beer, max_beer)
@@ -51,11 +54,12 @@ async def inline_gay_handler(query: types.InlineQuery):
     description = 'Покажи своё пивное пузо',
     thumb_url = 'https://headtopics.com/images/2019/3/18/lentaruofficial/105010861085109120479-1107539910196674560.webp?w=1280&h=853&q=1',
     input_message_content = types.InputTextMessageContent(message_text = beer_text))]
+    return beer_articles
 
-
-    articles = gay_articles + beer_articles
-
-    await query.answer(results = articles, cache_time = 60, is_personal = True)
+@dp.inline_handler()
+async def inline_handler(query: types.InlineQuery):
+    articles = inline_gay_handler() + inline_beer_handler()
+    await query.answer(results = articles, cache_time = 1, is_personal = True)
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
