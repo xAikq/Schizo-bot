@@ -9,9 +9,6 @@ load_dotenv(find_dotenv())
 bot = Bot(os.getenv('token'))
 dp = Dispatcher(bot)
 
-# gay_articles = []
-# beer_articles = []
-
 def inline_gay_handler():
     min_gay = 0
     max_gay = 100
@@ -56,9 +53,33 @@ def inline_beer_handler():
     input_message_content = types.InputTextMessageContent(message_text = beer_text))]
     return beer_articles
 
+def inline_deadinside_handler():
+    min_beer = 0
+    max_beer = 100
+    overall_beer = randint(min_beer, max_beer)
+    if overall_beer == 0:
+        deadinside_text = 'Нихуя ты не дединсайд...'
+    if overall_beer > 0 and overall_beer < 30:
+        deadinside_text = '🤡 Я дединсайд на: ' + str(overall_beer) + '%'
+    if overall_beer >= 30 and overall_beer < 70:
+        deadinside_text = '😋Я дединсайд на: ' + str(overall_beer) + '%'
+    if overall_beer >= 70:
+        deadinside_text = '😎 Я дединсайд на: ' + str(overall_beer) + '%'
+    result_deadinside_id: str = hashlib.md5(deadinside_text.encode()).hexdigest()
+
+    deadinside_articles = [InlineQueryResultArticle(
+    id = result_deadinside_id,
+    title = 'Насколько ты дединсайд',
+    description = 'ТЫСЯЧА... МИНУС... СЕМЬ...',
+    thumb_url = 'https://headtopics.com/images/2019/3/18/lentaruofficial/105010861085109120479-1107539910196674560.webp?w=1280&h=853&q=1',
+    input_message_content = types.InputTextMessageContent(message_text = deadinside_text))]
+    return deadinside_articles
+
+result = inline_gay_handler() + inline_beer_handler() + inline_deadinside_handler()
+
 @dp.inline_handler()
 async def inline_handler(query: types.InlineQuery):
-    articles = inline_gay_handler() + inline_beer_handler()
+    articles = result
     await query.answer(results = articles, cache_time = 1, is_personal = True)
 
 if __name__ == '__main__':
